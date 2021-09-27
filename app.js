@@ -8,16 +8,7 @@ const indexRouter = require('./routes/index');
 
 const app = express();
 
-//webpack 미들웨어 사용
-const webpackDevMiddleware = require('webpack-dev-middleware');
-const webpack = require('webpack');
-const webpackConfig = require('./webpack.config.js');
-const compiler = webpack(webpackConfig);
-app.use(webpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-}));  
-
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public'));
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 

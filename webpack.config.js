@@ -5,12 +5,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 module.exports = {
     mode: 'development',
     devtool: "eval-source-map",
-    entry: path.join(__dirname, 'web', 'index.js'),
+    entry: {
+        index: path.join(__dirname, 'web', 'index.js'),
+    },
     output: {
         clean: true,
-        filename: 'bundle.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'public'),
         publicPath: "",
+    },
+    resolve: {
+        modules: [ 'node_modules' ],
+        alias: {
+            "@src": path.resolve(__dirname, 'web')
+        },
     },
     module: {
         rules: [
@@ -33,7 +41,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "Airbnb",
+            title: "title",
         }),
         new MiniCssExtractPlugin({ filename: 'style.css' })
     ],
